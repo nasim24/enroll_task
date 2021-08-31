@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.esm.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +31,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <label for="" class="col-md-2">DOB</label>
-                            <input type="date" class="form-control col-md-10" name="dob" placeholder="Enter Your Lastname" required>
+                            <input type="text" id="datepicker" class="form-control col-md-10" name="dob" required>
                         </div>
                         
                         <div class="form-row mt-3">
@@ -103,9 +105,17 @@ $res=mysqli_query($connect,$sql);
 
     <script>
         $(document).ready(function(){
-
+            
             $("#submit_form").on("submit", function(e){
             e.preventDefault();
+            
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                orientation: "top",
+                endDate: "today",
+                maxDate: 0 
+            });
                 var formData = new FormData(this);
                 $.ajax({
                     url: "empstore.php",
